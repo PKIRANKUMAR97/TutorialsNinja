@@ -8,6 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def setup():
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)
-    return driver
+    yield driver
+    driver.quit()
 
 

@@ -24,8 +24,9 @@ class Test_001_AccountReg:
         self.regpage=AccountRegistrationPage.AccountRegistrationPage(self.driver)
         self.regpage.setFirstname("Johnn")
         self.regpage.setLastname("Kinder")
-        # self.regpage.setEmail("qxxdrfftt1@gmail.com")
-        # self.regpage.setEmail=randomString.random_string_generator()+'@gmail.com'
+        # self.regpage.setEmail("qxxdrfftt88@gmail.com")
+        self.email=randomString.random_string_generator()+'@gmail.com'
+        self.regpage.setEmail(self.email)
         self.regpage.setTelephone("55555589")
         self.regpage.setPassword("johnqwer@")
         self.regpage.setConfirmPassword("johnqwer@")
@@ -38,13 +39,15 @@ class Test_001_AccountReg:
         if self.confmsg=="Your Account Has Been Created!":
 
             assert True
-            self.driver.close()
+
         else:
-            # self.driver.save_screenshot(os.path.abspath(os.curdir))+"\\screenshots\\"+"test_account_reg.png"
-            screenshot_path = os.path.join(os.path.abspath(os.curdir), "screenshots", "test_account_reg.png")
+            screenshot_path = os.path.join(os.getcwd(), "screenshots", "test_account_reg_failure.png")
+
             self.driver.save_screenshot(screenshot_path)
             assert False
-            self.driver.close()
+
+
+
 
 
 
