@@ -1,6 +1,8 @@
 import os.path
 import time
 
+import pytest
+
 from pageObjects import HomePage, AccountRegistrationPage
 from utilities import randomString
 from utilities.customLogger import LogGen
@@ -15,7 +17,7 @@ from utilities.readProperties import ReadConfig
 class Test_001_AccountReg:
     baseURL=ReadConfig.getApplicationURL()# "https://tutorialsninja.com/demo/"
     logger = LogGen.loggen()
-
+    @pytest.mark.regression
     def test_account_registration(self,setup):
         self.logger.info("----test_001 Testing account registration----")
         self.driver=setup

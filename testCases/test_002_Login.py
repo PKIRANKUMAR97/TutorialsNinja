@@ -12,7 +12,7 @@ class Test_002_Login():
 
     username = ReadConfig.getUseremail()
     password = ReadConfig.getPassword()
-
+    @pytest.mark.sanity
     def test_login(self,setup):
         self.logger.info("----test_002 Testing login started----")
         self.driver=setup
