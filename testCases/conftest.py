@@ -25,7 +25,8 @@ def setup(browser):
 
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
-    return driver
+    yield driver
+    driver.quit()
 
 
 def pytest_addoption(parser):
