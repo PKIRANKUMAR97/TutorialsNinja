@@ -29,7 +29,9 @@ def setup(browser):
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser")      ## this will get the browser value from cmd line
+    parser.addoption("--browser",
+                     default="chrome",help="browser to use : chrome or edge or gecko")
+                                          ## this will get the browser value from cmd line
 
 @pytest.fixture()
 def browser(request):
@@ -37,19 +39,19 @@ def browser(request):
 
 ########### pytest HTML Report ################
 
-# It is hook for Adding Environment info to HTML Report
-def pytest_configure(config):
-    config._metadata['Project Name'] = 'Opencart'
-    config._metadata['Module Name'] = 'CustRegistration'
-    config._metadata['Tester'] = 'Pavan'
-
-# It is hook for delete/Modify Environment info to HTML Report
-@pytest.mark.optionalhook
-def pytest_metadata(metadata):
-    metadata.pop("JAVA_HOME", None)
-    metadata.pop("Plugins", None)
-
 #Specifying report folder location and save report with timestamp
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     config.option.htmlpath = os.path.abspath(os.curdir)+"\\reports\\"+datetime.now().strftime("%d-%m-%Y %H-%M-%S")+".html"
+
+# Modify environment metadata (pytest-html hook)
+@pytest.hookimpl(optionalhook=True)
+def pytest_metadata(metadata):
+
+    metadata["Project Name"] = "TutorialsNinja_dummy_project"
+    metadata["Module Name"] = "CustRegistration"
+    metadata["Tester"] = "Kiran"
+
+    # Remove unwanted fields
+    metadata.pop("JAVA_HOME", None)
+    metadata.pop("Plugins", None)
